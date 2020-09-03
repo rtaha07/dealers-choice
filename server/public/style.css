@@ -1,0 +1,60 @@
+body {
+  margin: 10px;
+  padding: 0;
+  text-align: center;
+  font-family: helvetica sans-serif;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+  width: 30%;
+  margin: auto;
+}
+
+li {
+  font-size: 1.2rem;
+  line-height: 2rem;
+  border-bottom: 1px dotted #777;
+}
+
+a {
+  margin-right: 5px;
+  padding: 5px;
+  /* border: solid 1px darkcyan; */
+  text-decoration: none;
+  color: darkcyan;
+}
+
+a.active {
+  background-color: darkcyan;
+  color: white;
+}
+
+form button {
+  margin-right: 5px;
+  padding: 5px;
+  background-color: #0099cc;
+  border-radius: 30px;
+  text-transform: uppercase;
+  color: white;
+}

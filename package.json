@@ -2,32 +2,38 @@
 	"name": "template",
 	"version": "1.0.0",
 	"description": "",
-	"main": "server/index.js",
+	"main": "server/app.js",
 	"scripts": {
 		"test": "mocha \"**/*.spec.js\"",
 		"build": "webpack",
 		"build:dev": "webpack -w",
-		"start": "node server/index.js",
-		"start:dev": "npm run build && nodemon --ignore client --ignore server/public"
+		"start": "node server/app.js",
+		"server": "nodemon server",
+		"start:dev": "npm run build && nodemon"
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"axios": "^0.20.0",
+		"babel": "^6.23.0",
+		"body-parser": "^1.19.0",
 		"express": "^4.17.1",
+		"faker": "^5.1.0",
 		"morgan": "^1.10.0",
 		"pg": "^8.3.3",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
-		"sequelize": "^6.3.4"
+		"react-router-dom": "^5.2.0",
+		"sequelize": "^6.3.5"
 	},
 	"devDependencies": {
+		"@babel/core": "^7.11.5",
+		"@babel/preset-react": "^7.10.4",
+		"babel-loader": "^8.1.0",
 		"chai": "^4.2.0",
 		"mocha": "^8.1.2",
 		"nodemon": "^2.0.4",
 		"webpack": "^4.44.1",
-		"webpack-cli": "^3.3.12",
-		"@babel/core": "^7.4.3",
-		"@babel/preset-react": "^7.0.0",
-		"babel-loader": "^8.0.5"
+		"webpack-cli": "^3.3.12"
 	}
 }
