@@ -10,9 +10,12 @@ class App extends Component {
     };
     this.create = this.create.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
+    this.selectedUser = this.selectedUser.bind(this);
   }
 
   async componentDidMount() {
+    const { users } = this.state;
+    //const userId = this.state.userId;
     try {
       const users = (await axios.get('/api/users')).data;
       this.setState({ users: users });
@@ -21,18 +24,20 @@ class App extends Component {
     }
 
     window.addEventListener('hashchange', async () => {
-      console.log(this.state.users);
+      const userId = window.location.hash.slice(1) * 1;
+      console.log(users);
+      this.selectedUser(userId);
     });
 
     if (window.location.hash.slice(1)) {
-      loadInitialReservations();
+      this.selectedUser(userId);
     } else {
-      this.setState({ userId: users[0].id });
+      this.setState({ userId: users[0].userId });
     }
   }
 
   render() {
-    const { users, userId } = this.state;
+    const { users } = this.state;
 
     return (
       <div className="App">
@@ -82,15 +87,15 @@ class App extends Component {
     }
   }
 
-  //   async selectedUser(userId) {
-  //     try {
-  //       const res = await axios.get(`/api/users/${userId}`);
-  //       const selectedUser = res.data;
-  //       this.setState({ selectedUser });
-  //     } catch (err) {
-  //       console.log('There was a problem getting user info!');
-  //     }
-  //   }
+  async selectedUser(userId) {
+    try {
+      const res = await axios.get(`/api/users/${userId}`);
+      const selectedUser = res.data;
+      this.setState({ selectedUser, userId });
+    } catch (err) {
+      console.log('There was a problem getting user info!');
+    }
+  }
 }
 
 const UsersList = ({ users, deleteUser }) => {
@@ -103,7 +108,7 @@ const UsersList = ({ users, deleteUser }) => {
 const User = ({ user, deleteUser }) => {
   return (
     <li>
-      <a href={`#${user.id}`}>
+      <a href={`api/users/#${user.id}`}>
         <h3>{user.name}</h3>
       </a>
       <span>{user.imageUrl}</span>

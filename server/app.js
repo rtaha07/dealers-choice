@@ -1,13 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-//require morgan|volleyball, path packages
 const morgan = require('morgan');
 const path = require('path');
 const { conn, User } = require('./db/index');
 const faker = require('faker');
 
-//initialize app
 const app = express();
 
 app.use(morgan('dev'));
@@ -20,20 +18,30 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/api/users', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      attributes: ['id', 'name'],
+      // attributes: ['id', 'name'],
       order: [['name', 'ASC']],
     });
-    res.json(users);
+    res.send(users);
   } catch (err) {
     next(err);
   }
 });
 
-//app.use('/index', require('./routes/index'));
-app.get('/api/users/:userId', async (req, res, next) => {
+app.get('/api/users/:id', async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.userId);
-    res.json(user);
+    const user = await User.findOne({
+      where: { id: req.params.id },
+    });
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.post('/api/users/:userId', async (req, res, next) => {
+  try {
+    const user = await User.create({ userId: req.params.id });
+    res.status(201).send(user);
   } catch (err) {
     next(err);
   }
@@ -43,7 +51,7 @@ app.put('/api/users/:id', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
     await user.update(req.body);
-    res.send(user);
+    res.json(user);
   } catch (err) {
     next(err);
   }
@@ -67,8 +75,6 @@ app.post('/api/users', async (req, res, next) => {
   }
 });
 
-// For all GET requests that aren't to an API route,
-// we will send the index.html!
 app.get('/', async (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
@@ -86,10 +92,8 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message || 'Internal Server Error.');
 });
 
-//set PORT
 const PORT = process.env.PORT || 3000;
 
-//listen
 const init = async function startServer() {
   try {
     await conn.sync();
