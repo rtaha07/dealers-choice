@@ -22,11 +22,6 @@ const syncAndSeed = async () => {
   let users = await Promise.all(
     ['Khalid', 'Sarah', 'Joe'].map((name) => User.create({ name }))
   );
-  // const [moe, larry, lucy] = await Promise.all([
-  //   Friend.create({ name: 'moe', rating: 10 }),
-  //   Friend.create({ name: 'larry', rating: 1 }),
-  //   Friend.create({ name: 'lucy' }),
-  // ]);
 };
 
 module.exports = {

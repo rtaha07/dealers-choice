@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-//import './server/public/style.css';
-// import UserList from './components/usersList';
-// import SingleUser from './components/singleUser';
 import axios from 'axios';
 
 class App extends Component {
@@ -22,17 +19,18 @@ class App extends Component {
     } catch (err) {
       console.log('ERROR');
     }
+
+    window.addEventListener('hashchange', async () => {
+      console.log(this.state.users);
+    });
+
+    if (window.location.hash.slice(1)) {
+      loadInitialReservations();
+    } else {
+      this.setState({ userId: users[0].id });
+    }
   }
 
-  // window.addEventListener('hashchange', async () => {
-  //   console.log(this.state.users);
-  // });
-
-  // if (window.location.hash.slice(1)) {
-  //   loadInitialReservations();
-  // } else {
-  //   this.setState({ userId: users[0].id });
-  // }
   render() {
     const { users, userId } = this.state;
 
@@ -42,7 +40,7 @@ class App extends Component {
           <h1 className="App-title">Dealers Choice Users List</h1>
         </header>
         <section>
-          {/* <br></br> */}
+          <br></br>
           <form>
             <button onClick={this.create}>Create User</button>
           </form>
@@ -50,33 +48,8 @@ class App extends Component {
             <ul id="usersList">
               <div>
                 <UsersList users={users} deleteUser={this.deleteUser} />
-                {/* {users.map((user) => {
-                  return (
-                    <div>
-                      <li
-                        key={user.id}
-                        className={userId === user.id ? 'selected' : ''}
-                      >
-                        <a href={`#${user.id}`}> */}
-                {/* <UsersList
-                            users={users}
-                            deleteUser={this.deleteUser}
-                          /> */}
-                {/* {user.name}
-                        </a>
-                        <form>
-                          <button
-                            key={user.id}
-                            onClick={this.deleteUser}
-                          >
-                            Remove User
-                          </button>
-                        </form>
-                      </li>
-                    </div>
-                  );
-                })} */}
               </div>
+              <br></br>
             </ul>
           </div>
         </section>

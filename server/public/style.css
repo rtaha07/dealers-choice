@@ -1,6 +1,6 @@
 body {
-  margin: 10px;
-  padding: 0;
+  margin: 5px;
+  padding: 5px;
   text-align: center;
   font-family: helvetica sans-serif;
 }
@@ -11,13 +11,13 @@ body {
 
 .App-header {
   background-color: #222;
-  height: 150px;
-  padding: 20px;
+  height: 100px;
+  padding: 5px;
   color: white;
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 .App-intro {
@@ -25,13 +25,14 @@ body {
 }
 
 ul {
-  padding: 0;
+  padding: 5px;
   list-style: none;
   width: 30%;
   margin: auto;
 }
 
 li {
+  padding: 10px;
   font-size: 1.2rem;
   line-height: 2rem;
   border-bottom: 1px dotted #777;
@@ -40,7 +41,6 @@ li {
 a {
   margin-right: 5px;
   padding: 5px;
-  /* border: solid 1px darkcyan; */
   text-decoration: none;
   color: darkcyan;
 }
